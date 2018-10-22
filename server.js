@@ -25,3 +25,4 @@ app.listen(process.env.PORT || 6969, (err) => {
 	if(err) console.log(err);
 	else console.log("Server is running at "+port+"");
 });
+
