@@ -2,7 +2,9 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-// const apiRouter = require('./routers/apiRouter');
+const bcrypt = require('bcrypt-nodejs');
+const apiRouter = require('./routers/apiRouter');
+const session = require('express-session');
 
 mongoose.connect('mongodb://admin:password123@ds030607.mlab.com:30607/register-people', { useNewUrlParser: true }, (err) => {
 	if(err) console.log(err);
@@ -11,14 +13,24 @@ mongoose.connect('mongodb://admin:password123@ds030607.mlab.com:30607/register-p
 
 let app = express();
 
+app.use(session({
+	secret: 'roseislalala',
+	resave: false,
+	saveUninitialized: true,
+	cookie: { 
+		httpOnly: false,
+		maxAge: 7*24*60*60*1000
+	}
+}));
+
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
 
-app.get('/', (req,res) => {
-	res.send("Techkids app!");
-});
+app.use('/api', apiRouter);
 
-// app.use('/api', apiRouter);
+app.get('/', (req,res) => {
+	res.send("Keep warm baby <3");
+});
 
 const port = process.env.PORT || 6969;
 app.listen(process.env.PORT || 6969, (err) => {
