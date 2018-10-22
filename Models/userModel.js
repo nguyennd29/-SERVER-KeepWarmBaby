@@ -6,10 +6,11 @@ const UserSchema = new Schema({
 	username: { type: String, unique: true, required: true },
 	password: { type: String, required: true },
 	receiver: [{
-		mail: { type: String, required: true},
-		mailContent: { type: String, required: true} 
-	}];
-	
+		mail: { type: String},
+		mailContent: { type: String},
+		receiverLocation: { type: String},
+		timeReceive: { type: Date}
+	}]
 });
 
 UserSchema.pre('save', function(next) {

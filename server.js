@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt-nodejs');
 const apiRouter = require('./routers/apiRouter');
 const session = require('express-session');
+var CronJob = require('cron').CronJob;
 
 mongoose.connect('mongodb://admin:password123@ds030607.mlab.com:30607/register-people', { useNewUrlParser: true }, (err) => {
 	if(err) console.log(err);
