@@ -19,7 +19,7 @@ AuthRouter.post('/login', (req,res) => {
 		}
 	});
 });
-
+ 
 AuthRouter.delete('/logout', (req,res) => {
 	req.session.destroy();
 	res.send({ success: 1, message:"Logout successfully"});
