@@ -29,7 +29,7 @@ UserRouter.get('/:id', (req, res) => {
 })
 
 UserRouter.put('/:id', (req, res) => {
-    const {password, name, avatar, gender} = req.body || {};
+    const {password, name} = req.body || {};
     const userId = req.params.id;
     UserModel.findById(
     	userId,

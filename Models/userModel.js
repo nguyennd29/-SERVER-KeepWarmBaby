@@ -11,6 +11,8 @@ const UserSchema = new Schema({
 		receiverLocation: { type: String},
 		timeReceive: { type: Date}
 	}]
+},{
+	timestamp: true
 });
 
 UserSchema.pre('save', function(next) {
