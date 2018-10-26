@@ -28,6 +28,4 @@ AuthRouter.delete('/logout', (req,res) => {
 	res.send({ success: 1, message:"Logout successfully"});
 });
 
-
-
 module.exports = AuthRouter;
