@@ -12,6 +12,7 @@ UserRouter.post('/', (req,res) => {
 		else res.status(201).json({ success: 1, user: userCreated});
 	});
 });
+
 //R
 UserRouter.get('/', (req,res) => {
 	UserModel.find({}, {password: 0}, (err, users) => {
@@ -54,5 +55,7 @@ UserRouter.delete('/:id', (req,res) => {
        res.status(200).json({ success: 1, user: userDeleted })
     });
 });
+
+
 
 module.exports = UserRouter;
