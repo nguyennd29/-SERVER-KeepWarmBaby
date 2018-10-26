@@ -1,6 +1,7 @@
 const express = require('express');
 const AuthRouter = express.Router();
 const bcrypt = require('bcrypt-nodejs');
+// const mailer = require('../mailer.js');
 
 const UserSchema = require('../Models/userModel.js');
 
@@ -19,11 +20,14 @@ AuthRouter.post('/login', (req,res) => {
 			} else res.status(401).json({ success: 0, error: "Wrong password"});
 		}
 	});
+	// mailer.transporter();
 });
  
 AuthRouter.delete('/logout', (req,res) => {
 	req.session.destroy();
 	res.send({ success: 1, message:"Logout successfully"});
 });
+
+
 
 module.exports = AuthRouter;
