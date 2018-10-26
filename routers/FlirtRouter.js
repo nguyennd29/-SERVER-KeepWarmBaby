@@ -6,60 +6,81 @@ const FlirtModel = require('../Models/userModel.js');
 //CRUD
 //C
 FlirtRouter.post('/:id', (req, res) => {
-    const {mail, mailContent, receiverLocation, timeReceive} = req.body;
+    const mail = req.body.mail,
+        mailContent = req.body.mailContent,
+        receiverLocation = req.body.receiverLocation,
+        timeReceive = req.body.timeReceive;
     FlirtModel.findOne({_id: req.params.id}, (err, flirtUserFound) => {
-        if (err) res.status(500).json({success: 0, error: err})
+        if (err) res.status(500).json({success: 0, error: err});
         else {
-            res.status(200).json({success: 1, user: userFound})
-            FlirtModel.create({mail, mailContent, receiverLocation, timeReceive}, (err, flirtCreated) => {
+            flirtUserFound.receiver.push({mail, mailContent, receiverLocation, timeReceive});
+            // res.status(200).json({success: 1, user: flirtUserFound});
+            flirtUserFound.save((err, callback) => {
                 if (err) res.status(500).json({success: 0, error: err});
-                else {
-                    flirtUserFound.receiver.push(flirtCreated);
-                    res.status(201).json({success: 1, flirt: flirtCreated});
-                }
+                else res.send({success: 1, user: callback});
             });
         }
-    );
-}
-});
-
-//R
-FlirtRouter.get('/', (req, res) => {
-    FlirtModel.find({}, (err, flirts) => {
-        if (err) res.status(500).json({success: 0, error: err});
-        else res.json({success: 1, flirt: flirts});
     });
 });
 
+//R
 FlirtRouter.get('/:id', (req, res) => {
-    FlirtModel.findOne({_id: req.params.id}, (err, flirtFound) => {
-        if (err) res.status(500).json({success: 0, error: err})
-        else res.status(200).json({success: 1, flirt: flirtFound})
+    FlirtModel.findOne({_id: req.params.id}, (err, flirtUserFound) => {
+        if (err) res.status(500).json({success: 0, error: err});
+        else {
+            res.status(200).json({success: 1, flirt: flirtUserFound});
+        }
+    });
+});
+
+FlirtRouter.get('/:id/:num', (req, res) => {
+    uid = req.params.id;
+    fid = req.params.num;
+    FlirtModel.findOne({_id: uid}, (err, flirtUserFound) => {
+        if (err) res.status(500).json({success: 0, error: err});
+        res.status(200).json({success: 1, flirt: flirtUserFound.receiver[fid]});
     });
 });
 
 //U
-FlirtRouter.put('/:id', (req, res) => {
-    const {mail, mailContent, receiverLocation, timeReceive} = req.body || {};
-    const userId = req.params.id;
-    FlirtModel.findById(
-        userId,
-        (err, flirtFound) => {
-            if (err) res.status(500).json({success: 0, error: err});
-            else if (!flirtFound) res.status(404).json({success: 0, error: "No such email"});
-            else {
-                const flirtChange = {mailContent, mail,};
-                for (key in userChange) {
-                    if (userChange[key] !== null && userChange[key] !== undefined)
-                        userFound[key] = userChange[key];
-                }
-                userFound.save((err, userUpdated) => {
-                    if (err) res.status(500).json({success: 0, error: err});
-                    else res.send({success: 1, user: userUpdated});
-                });
-            }
-        });
-});
+// FlirtRouter.put('/:id', (req, res) => {
+//     const {mail, mailContent, receiverLocation, timeReceive} = req.body || {};
+//     const userId = req.params.id;
+//     FlirtModel.findById(
+//         userId,
+//         (err, flirtUserFound) => {
+//             if (err) res.status(500).json({success: 0, error: err});
+//             else if (!flirtUserFound) res.status(404).json({success: 0, error: "No such user"});
+//             else {
+//                 const flirtChange = {mailContent, mail, receiverLocation, timeReceive};
+//                 for (key in flirtChange) {
+//                     if (flirtChange[key] !== null && flirtChange[key] !== undefined)
+//                         flirtUserFound.receiver[key] = flirtChange[key];
+//                 }
+//                 flirtUserFound.save((err, flirtUserUpdated) => {
+//                     if (err) res.status(500).json({success: 0, error: err});
+//                     else res.send({success: 1, user: flirtUserUpdated});
+//                 });
+//             }
+//         });
+// });
 
+//D
+FlirtRouter.delete('/:id/:num', (req, res) => {
+    uid = req.params.id;
+    fid = req.params.num;
+    FlirtModel.findOne({_id: uid}, (err, flirtUserDeleted) => {
+        if (err) res.status(500).json({success: 0, error: err});
+        else {
+            // res.status(200).json({success: 1, user: userFound});
+            flirtUserDeleted.receiver = flirtUserDeleted.receiver.filter(item => item !== flirtUserDeleted.receiver[fid]);
+            // [1,2,3].filter(item => item != 2);
+            flirtUserDeleted.save((err, callback) => {
+                if (err) res.status(500).json({success: 0, error: err});
+                else res.send({success: 1, user: callback});
+            });
+        }
+    });
+});
 
 module.exports = FlirtRouter;
