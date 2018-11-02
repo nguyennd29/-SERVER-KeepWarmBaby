@@ -13,7 +13,7 @@ FlirtRouter.post('/:id', (req, res) => {
     FlirtModel.findOne({_id: req.params.id}, (err, flirtUserFound) => {
         if (err) res.status(500).json({success: 0, error: err});
         else {
-            flirtUserFound.receiver.push({mail, mailContent, receiverLocation, timeReceive});
+            flirtUserFound.receiver.push({mail, mailContent});
             // res.status(200).json({success: 1, user: flirtUserFound});
             flirtUserFound.save((err, callback) => {
                 if (err) res.status(500).json({success: 0, error: err});

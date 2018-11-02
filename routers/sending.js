@@ -2,6 +2,7 @@ const express = require('express');
 const SendingRouter = express.Router();
 const nodemailer = require('nodemailer');
 
+
 var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
