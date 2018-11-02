@@ -15,7 +15,7 @@ AuthRouter.post('/login', (req,res) => {
 		else{
 			if(bcrypt.compareSync(password, userFound.password)) {
 				req.session.user = { userId: userFound._id };
-				res.json({ success: 1, message: "Login successful", redirect: `http://localhost:8080/main?id=${userFound._id}`});
+				res.json({ success: 1, message: "Login successful", redirect: `https://keepwarmbaby.herokuapp.com/main.html?id=${userFound._id}`||`http://localhost:8080/main?id=${userFound._id}`});
                 // `http://keepwarmbaby.herokuapp.com/main.html?id=${userFound._id}`||
 				console.log(userFound._id);
 			} else res.status(401).json({ success: 0, error: "Wrong password"});
