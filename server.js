@@ -335,7 +335,7 @@ var job = new CronJob('00 00 06 * * 1-5', function () {
 																					<tr>
 																						<td class="btn-03 active-t" bgcolor="#f1524c" align="center" style="mso-padding-alt:14px 30px; font:700 14px/16px Arial, Helvetica, sans-serif; text-transform:uppercase; border-radius:22px;">
 																							<multiline>
-																								<a href="http://link">
+																								<a href="https://keepwarmbaby.herokuapp.com">
 																									More Details
 																								</a>
 																							</multiline>
