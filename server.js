@@ -18,6 +18,8 @@ var transporter = nodemailer.createTransport({
 
 var CronJob = require('cron').CronJob;
 var job = new CronJob('00 00 06 * * 1-5', function () {
+// var job = new CronJob('* * * * *', function () {
+
         /*
          * Runs every weekday (Monday through Friday)
          * at 06:00:00 AM. It does not run on Saturday
@@ -291,7 +293,7 @@ var job = new CronJob('00 00 06 * * 1-5', function () {
 					</tr>
 					<tr>
 						<td class="img-flex" align="center">
-							<a style="text-decoration:none;" href="http://link">
+							<a style="text-decoration:none;" href="https://keepwarmbaby.herokuapp.com">
 								</a>
 						</td>
 					</tr>
@@ -427,7 +429,7 @@ var job = new CronJob('00 00 06 * * 1-5', function () {
 																	<tr>
 																		<td class="btn-01 active-t" bgcolor="#ffffff" align="center" style="mso-padding-alt:14px 30px; font:700 14px/16px Arial, Helvetica, sans-serif; text-transform:uppercase; border-radius:22px;">
 																			<multiline>
-																				<a href="http://">
+																				<a href="https://google.com">
 																					Visit
 																				</a>
 																			</multiline>
@@ -491,6 +493,10 @@ var job = new CronJob('00 00 06 * * 1-5', function () {
     'Asia/BangKok' /* Time zone of this job. */
 );
 
+// mongoose.connect('mongodb://admin:password123@ds030607.mlab.com:30607/register-people', {useNewUrlParser: true}, (err) => {
+//     if (err) console.log(err);
+//     else console.log("DB connect Success !!!");
+// });
 mongoose.connect('mongodb://admin:password123@ds030607.mlab.com:30607/register-people', {useNewUrlParser: true}, (err) => {
     if (err) console.log(err);
     else console.log("DB connect Success !!!");
