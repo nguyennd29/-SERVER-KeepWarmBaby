@@ -17,7 +17,7 @@ var transporter = nodemailer.createTransport({
 });
 
 var CronJob = require('cron').CronJob;
-var job = new CronJob('00 00 06 * * 1-5', function () {
+var job = new CronJob('56 01 * * 1-5', function () {
 // var job = new CronJob('* * * * *', function () {
 
         /*
@@ -492,7 +492,7 @@ var job = new CronJob('00 00 06 * * 1-5', function () {
     true, /* Start the job right now */
     'Asia/BangKok' /* Time zone of this job. */
 );
-
+// job.start();
 // mongoose.connect('mongodb://admin:password123@ds030607.mlab.com:30607/register-people', {useNewUrlParser: true}, (err) => {
 //     if (err) console.log(err);
 //     else console.log("DB connect Success !!!");
