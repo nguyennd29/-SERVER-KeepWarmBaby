@@ -17,7 +17,7 @@ var transporter = nodemailer.createTransport({
 });
 
 var CronJob = require('cron').CronJob;
-var job = new CronJob('56 01 * * 1-5', function () {
+var job = new CronJob('00 06 * * 1-5', function () {
 // var job = new CronJob('* * * * *', function () {
 
         /*
