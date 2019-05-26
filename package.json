@@ -28,6 +28,7 @@
     "mongoose": "^5.3.2",
     "node-cron": "^2.0.3",
     "nodemailer": "^4.6.8",
+    "request": "^2.88.0",
     "session": "^0.1.0"
   }
 }
