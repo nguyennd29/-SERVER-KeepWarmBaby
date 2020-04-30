@@ -24,7 +24,7 @@
     "cron": "^1.4.1",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "mongoose": "^5.3.2",
     "node-cron": "^2.0.3",
     "nodemailer": "^4.6.8",
